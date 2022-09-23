@@ -1,7 +1,11 @@
 package com.example.hw22;
 
+import static com.example.hw22.R.color.grey;
+import static com.example.hw22.R.color.orange;
+
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.telephony.PhoneNumberFormattingTextWatcher;
 import android.text.Editable;
@@ -31,7 +35,6 @@ public class MainActivity extends AppCompatActivity {
         editText = findViewById(R.id.gmailEt);
         editText1 = findViewById(R.id.passwordEt);
         button = findViewById(R.id.btnGo);
-        button1 = findViewById(R.id.forgotPsTv);
         editText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
@@ -61,27 +64,30 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void afterTextChanged(Editable editable) {
-
-            }
-        });
-
-
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (editText.getText().toString().equals("Админ") && editText1.getText().toString().equals("Админ")) {
-                    Toast.makeText(MainActivity.this, "Вы успешно ввели пароль", Toast.LENGTH_SHORT).show();
-                    linearLayout.setVisibility(View.GONE);
-                    textView.setVisibility(View.GONE);
-                    textView2.setVisibility(View.GONE);
-                } else {
-                    Toast.makeText(MainActivity.this, "Вы вели неправильный логин или пароль", Toast.LENGTH_SHORT).show();
+                if (editText.getText().toString().length() >= 1 && editText1.getText().toString().length() >= 1) {
+                    button.setBackgroundColor(button.getContext().getResources().getColor(orange));
+                }else{
+                    button.setBackgroundColor(button.getContext().getResources().getColor(grey));
                 }
-
-
             }
         });
 
+
+            button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (editText.getText().toString().equals("Админ") && editText1.getText().toString().equals("Админ")) {
+                        Toast.makeText(MainActivity.this, "Вы успешно ввели пароль", Toast.LENGTH_SHORT).show();
+                        linearLayout.setVisibility(View.GONE);
+                        textView.setVisibility(View.GONE);
+                        textView2.setVisibility(View.GONE);
+                    } else {
+                        Toast.makeText(MainActivity.this, "Вы вели неправильный логин или пароль", Toast.LENGTH_SHORT).show();
+                    }
+
+
+                }
+            });
     }
 
 
